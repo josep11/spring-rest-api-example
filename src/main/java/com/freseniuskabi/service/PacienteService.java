@@ -3,6 +3,7 @@ package com.freseniuskabi.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.freseniuskabi.dao.IPacienteDAO;
@@ -12,6 +13,8 @@ import com.freseniuskabi.models.Paciente;
 public class PacienteService implements IPacienteService {
 
 	@Autowired
+	// @Qualifier("pacienteDAOMock")
+	@Qualifier("pacienteDAO")
 	private IPacienteDAO pacienteDAO;
 
 	@Override
