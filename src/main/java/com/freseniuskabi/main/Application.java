@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.freseniuskabi.bgtask.BgTask;
 import com.freseniuskabi.service.IPacienteService;
@@ -17,6 +18,7 @@ import com.freseniuskabi.service.IPacienteService;
 @SpringBootApplication
 // super important, tell spring where to auto-config components
 @ComponentScan("com.freseniuskabi.*")
+@EnableJpaRepositories(basePackages = "com.freseniuskabi.dao")
 @EntityScan(basePackages = { "com.freseniuskabi.models" })
 public class Application {
 
@@ -34,6 +36,7 @@ public class Application {
 	CommandLineRunner init() {
 		this.bgtask.sayHi();
 
+		this.pacienteService.findAll();
 		return (evt) -> Arrays.asList("Darwin,Lange".split(",")).forEach(a -> {
 			// this.pacienteService.savePaciente(new Paciente(a, "password"));
 		});
@@ -45,14 +48,12 @@ public class Application {
 		return args -> {
 
 			System.out.println("Let's inspect the beans provided by Spring Boot:");
-
 			String[] beanNames = ctx.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
-			for (String beanName : beanNames) {
-				if (beanName.toLowerCase().contains("bgtask")) {
-					System.out.println(beanName);
-				}
-			}
+			// Arrays.stream(beanNames)
+			// .filter(beanName -> beanName.toLowerCase().contains("bgtask"))
+			// .forEach(System.out::println);
+
 		};
 	}
 

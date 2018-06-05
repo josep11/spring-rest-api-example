@@ -3,6 +3,7 @@ package com.freseniuskabi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ import com.freseniuskabi.service.IPacienteService;
 public class PacienteController {
 
 	@Autowired
+	@Qualifier("PacienteServiceUsingRepo")
 	private IPacienteService pacienteService;
 
 	@GetMapping
@@ -34,13 +36,13 @@ public class PacienteController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
 	public List<Paciente> getAllPacientes() {
-		List<Paciente> list = this.pacienteService.getAllPacientes();
+		List<Paciente> list = this.pacienteService.findAll();
 		return list;
 	}
 
 	@PostMapping(path = "", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Void> addPaciente(@RequestBody Paciente paciente, UriComponentsBuilder builder) {
-		boolean flag = this.pacienteService.savePaciente(paciente);
+		boolean flag = this.pacienteService.save(paciente);
 		if (flag == false) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
@@ -57,16 +59,16 @@ public class PacienteController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		// TODO:password won't be here because of the JsonIgnore
-		this.pacienteService.updatePaciente(id, p);
+		this.pacienteService.update(id, p);
 		return new ResponseEntity<>(p, HttpStatus.OK);
 	}
 
 	@DeleteMapping("{id}")
 	public ResponseEntity<Void> deletePaciente(@PathVariable("id") Long id) {
-		if (!this.pacienteService.pacienteExists(id)) {
+		if (!this.pacienteService.exists(id)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		this.pacienteService.deletePaciente(id);
+		this.pacienteService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 

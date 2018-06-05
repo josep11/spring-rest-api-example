@@ -11,14 +11,14 @@ public interface IPacienteService {
 
 	Paciente findById(Long id);
 
-	List<Paciente> getAllPacientes();
+	List<Paciente> findAll();
 
-	boolean savePaciente(Paciente p);
+	boolean save(Paciente p);
 
-	void updatePaciente(Long id, Paciente p);
+	void update(Long id, Paciente p);
 
-	void deletePaciente(Long id);
+	void delete(Long id);
 
-	boolean pacienteExists(Long id);
+	boolean exists(Long id);
 
 }

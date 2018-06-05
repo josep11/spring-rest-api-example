@@ -10,6 +10,7 @@ import com.freseniuskabi.dao.IPacienteDAO;
 import com.freseniuskabi.models.Paciente;
 
 @Service
+@Qualifier("PacienteService")
 public class PacienteService implements IPacienteService {
 
 	@Autowired
@@ -24,12 +25,12 @@ public class PacienteService implements IPacienteService {
 	}
 
 	@Override
-	public List<Paciente> getAllPacientes() {
+	public List<Paciente> findAll() {
 		return this.pacienteDAO.getAllPacientes();
 	}
 
 	@Override
-	public synchronized boolean savePaciente(Paciente p) {
+	public synchronized boolean save(Paciente p) {
 		Long id = p.getId() != null ? p.getId() : -1;
 		if (this.pacienteDAO.pacienteExists(id)) {
 			return false;
@@ -40,17 +41,17 @@ public class PacienteService implements IPacienteService {
 	}
 
 	@Override
-	public void deletePaciente(Long id) {
+	public void delete(Long id) {
 		this.pacienteDAO.deletePaciente(id);
 	}
 
 	@Override
-	public void updatePaciente(Long id, Paciente p) {
+	public void update(Long id, Paciente p) {
 		this.pacienteDAO.updatePaciente(id, p);
 	}
 
 	@Override
-	public boolean pacienteExists(Long id) {
+	public boolean exists(Long id) {
 		return this.pacienteDAO.pacienteExists(id);
 	}
 
