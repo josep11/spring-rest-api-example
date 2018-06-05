@@ -5,7 +5,7 @@
 
     <groupId>com.freseniuskabi</groupId>
     <artifactId>rest-api-example</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
 
     <properties>
         

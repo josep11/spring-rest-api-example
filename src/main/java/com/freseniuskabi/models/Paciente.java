@@ -54,4 +54,12 @@ public class Paciente {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Paciente [id=").append(this.id).append(", username=").append(this.username).append(", password=")
+				.append(this.password).append("]");
+		return builder.toString();
+	}
+
 }

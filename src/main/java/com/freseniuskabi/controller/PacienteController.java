@@ -40,6 +40,12 @@ public class PacienteController {
 		return list;
 	}
 
+	@RequestMapping(value = "{id}", method = RequestMethod.GET, produces = "application/json")
+	public Paciente getOnePaciente(@PathVariable("id") Long id) {
+		System.out.println(this.pacienteService.findById(id));
+		return this.pacienteService.findById(id);
+	}
+
 	@PostMapping(path = "", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Void> addPaciente(@RequestBody Paciente paciente, UriComponentsBuilder builder) {
 		boolean flag = this.pacienteService.save(paciente);
@@ -71,5 +77,10 @@ public class PacienteController {
 		this.pacienteService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+
+	// @GetMapping("test")
+	// public ResponseEntity<String> test() {
+	// return new ResponseEntity<>("ok", HttpStatus.OK);
+	// }
 
 }

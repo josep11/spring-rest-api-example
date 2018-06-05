@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.freseniuskabi.bgtask.BgTask;
+import com.freseniuskabi.models.Paciente;
 import com.freseniuskabi.service.IPacienteService;
 
 @SpringBootApplication
@@ -38,7 +39,7 @@ public class Application {
 
 		this.pacienteService.findAll();
 		return (evt) -> Arrays.asList("Darwin,Lange".split(",")).forEach(a -> {
-			// this.pacienteService.savePaciente(new Paciente(a, "password"));
+			this.pacienteService.save(new Paciente(a, "password"));
 		});
 
 	}
