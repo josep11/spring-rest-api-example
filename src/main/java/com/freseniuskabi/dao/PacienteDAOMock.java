@@ -1,6 +1,6 @@
 package com.freseniuskabi.dao;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,16 +12,16 @@ import com.freseniuskabi.models.Paciente;
 @Qualifier("pacienteDAOMock")
 public class PacienteDAOMock implements IPacienteDAO {
 
+	List<Paciente> list = Arrays.asList(new Paciente("hola", "adeu"), new Paciente("paciente2", "pwd"));
+
 	@Override
 	public List<Paciente> getAllPacientes() {
-		List<Paciente> list = new ArrayList<>();
-		list.add(new Paciente("hola", "adeu"));
-		return list;
+		return this.list;
 	}
 
 	@Override
 	public Paciente getPacienteById(Long PacienteId) {
-		return new Paciente();
+		return this.list.stream().filter(p -> p.getId() == PacienteId).findFirst().get();
 	}
 
 	@Override
