@@ -4,12 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "paciente")
+// only needed if the table name is different from class
+// @Table(name = "paciente")
 public class Paciente {
 
 	@Id
@@ -44,6 +44,14 @@ public class Paciente {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

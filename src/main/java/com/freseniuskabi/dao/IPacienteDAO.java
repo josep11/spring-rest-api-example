@@ -12,10 +12,12 @@ public interface IPacienteDAO {
 
 	void addPaciente(Paciente Paciente);
 
-	void updatePaciente(Paciente Paciente);
+	void updatePaciente(Long id, Paciente Paciente);
 
 	void deletePaciente(Long PacienteId);
 
-	boolean PacienteExists(String username);
+	boolean pacienteExists(String username);
+
+	boolean pacienteExists(Long id);
 
 }

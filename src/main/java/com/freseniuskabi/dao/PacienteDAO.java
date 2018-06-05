@@ -36,9 +36,10 @@ public class PacienteDAO implements IPacienteDAO {
 	}
 
 	@Override
-	public void updatePaciente(Paciente paciente) {
-		Paciente artcl = this.getPacienteById(paciente.getId());
-		artcl.setUsername(paciente.getUsername());
+	public void updatePaciente(Long id, Paciente paciente) {
+		Paciente p = this.getPacienteById(id);
+		p.setUsername(paciente.getUsername());
+		p.setPassword(paciente.getPassword());
 		this.entityManager.flush();
 	}
 
@@ -48,10 +49,15 @@ public class PacienteDAO implements IPacienteDAO {
 	}
 
 	@Override
-	public boolean PacienteExists(String username) {
+	public boolean pacienteExists(String username) {
 		String hql = "FROM Paciente as p WHERE p.username = ? ";
 		int count = this.entityManager.createQuery(hql).setParameter(1, username).getResultList().size();
 		return count > 0 ? true : false;
+	}
+
+	@Override
+	public boolean pacienteExists(Long id) {
+		return this.getPacienteById(id) != null;
 	}
 
 }

@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.freseniuskabi.bgtask.BgTask;
-import com.freseniuskabi.models.Paciente;
 import com.freseniuskabi.service.IPacienteService;
 
 @SpringBootApplication
@@ -34,9 +33,11 @@ public class Application {
 	@Bean
 	CommandLineRunner init() {
 		this.bgtask.sayHi();
+
 		return (evt) -> Arrays.asList("Darwin,Lange".split(",")).forEach(a -> {
-			this.pacienteService.save(new Paciente(a, "password"));
+			// this.pacienteService.savePaciente(new Paciente(a, "password"));
 		});
+
 	}
 
 	@Bean

@@ -26,8 +26,29 @@ public class PacienteService implements IPacienteService {
 	}
 
 	@Override
-	public void save(Paciente p) {
-		this.pacienteDAO.addPaciente(p);
+	public synchronized boolean savePaciente(Paciente p) {
+		Long id = p.getId() != null ? p.getId() : -1;
+		if (this.pacienteDAO.pacienteExists(id)) {
+			return false;
+		} else {
+			this.pacienteDAO.addPaciente(p);
+			return true;
+		}
+	}
+
+	@Override
+	public void deletePaciente(Long id) {
+		this.pacienteDAO.deletePaciente(id);
+	}
+
+	@Override
+	public void updatePaciente(Long id, Paciente p) {
+		this.pacienteDAO.updatePaciente(id, p);
+	}
+
+	@Override
+	public boolean pacienteExists(Long id) {
+		return this.pacienteDAO.pacienteExists(id);
 	}
 
 }

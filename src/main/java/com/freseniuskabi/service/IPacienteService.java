@@ -13,5 +13,12 @@ public interface IPacienteService {
 
 	List<Paciente> getAllPacientes();
 
-	void save(Paciente p);
+	boolean savePaciente(Paciente p);
+
+	void updatePaciente(Long id, Paciente p);
+
+	void deletePaciente(Long id);
+
+	boolean pacienteExists(Long id);
+
 }
