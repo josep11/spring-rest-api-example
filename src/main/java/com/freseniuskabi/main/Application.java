@@ -48,13 +48,23 @@ public class Application {
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
 
-			System.out.println("Let's inspect the beans provided by Spring Boot:");
+			// System.out.println("Let's inspect the beans provided by Spring Boot:");
 			String[] beanNames = ctx.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
 			// Arrays.stream(beanNames)
 			// .filter(beanName -> beanName.toLowerCase().contains("bgtask"))
 			// .forEach(System.out::println);
 
+		};
+	}
+
+	@Bean
+	public CommandLineRunner profile(ApplicationContext ctx) {
+		return args -> {
+			String db = ctx.getEnvironment().getProperty("spring.datasource.url");
+			System.out.println("######################");
+			System.out.println(db);
+			System.out.println("######################");
 		};
 	}
 

@@ -13,4 +13,8 @@ Working with MySQL DB
 # Notes
 For spring-dev-tools to work autobuild of the project should be enabled
 
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
+# Deployment instructions
+Deployment tested to Heroku
+To select the profile:
+`spring-boot:run -Drun.jvmArguments="-Dspring.profiles.active=local"`
+java -jar file.jar --spring.profiles.active=production
