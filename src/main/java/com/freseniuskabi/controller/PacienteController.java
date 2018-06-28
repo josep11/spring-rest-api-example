@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.freseniuskabi.exception.FakeException;
 import com.freseniuskabi.exception.PacienteNotFoundException;
 import com.freseniuskabi.models.Paciente;
 import com.freseniuskabi.service.PacienteService;
@@ -36,6 +37,10 @@ public class PacienteController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
 	public List<Paciente> getAllPacientes() {
+		if (true) {
+			throw new FakeException("microservice fake exception");
+		}
+
 		List<Paciente> list = this.pacienteService.findAll();
 		return list;
 	}
