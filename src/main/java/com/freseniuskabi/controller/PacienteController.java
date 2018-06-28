@@ -3,7 +3,6 @@ package com.freseniuskabi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +17,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.freseniuskabi.exception.PacienteNotFoundException;
 import com.freseniuskabi.models.Paciente;
-import com.freseniuskabi.service.IPacienteService;
+import com.freseniuskabi.service.PacienteService;
 
 @RestController
 @RequestMapping("paciente")
 public class PacienteController {
 
 	@Autowired
-	@Qualifier("PacienteServiceUsingRepo")
-	private IPacienteService pacienteService;
+	// @Qualifier("PacienteService")
+	private PacienteService pacienteService;
 
 	@GetMapping
 	public List<Paciente> defaultCall() {
@@ -42,7 +42,11 @@ public class PacienteController {
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET, produces = "application/json")
 	public Paciente getOnePaciente(@PathVariable("id") Long id) {
-		System.out.println(this.pacienteService.findById(id));
+		Paciente paciente = this.pacienteService.findById(id);
+		if (paciente == null) {
+			throw new PacienteNotFoundException("id-" + id);
+		}
+		System.out.println(paciente);
 		return this.pacienteService.findById(id);
 	}
 
