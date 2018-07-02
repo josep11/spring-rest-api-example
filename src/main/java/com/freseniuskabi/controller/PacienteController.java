@@ -7,7 +7,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,14 +29,9 @@ public class PacienteController {
 	// @Qualifier("PacienteService")
 	private PacienteService pacienteService;
 
-	@GetMapping
-	public List<Paciente> defaultCall() {
-		return this.getAllPacientes();
-	}
-
-	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET, produces = "application/json")
 	public List<Paciente> getAllPacientes() {
-		if (true) {
+		if (Math.random() > 0.8) {
 			throw new FakeException("microservice fake exception");
 		}
 
